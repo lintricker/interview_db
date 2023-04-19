@@ -3,7 +3,7 @@ const db = require('../db')
 class CategoryController {
     async createCategory(req, res) {
         const {title} = req.body
-        const newCategory = await db.query(`INSERT INTO category (title) values ($1) RETURNING *`, [title])
+        const newCategory = await db.query('INSERT INTO category (title) values ($1) RETURNING *', [title])
         res.json(newCategory.rows[0])
     }
     async getCategories(req, res) {
