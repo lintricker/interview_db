@@ -14,14 +14,12 @@ class QuestionController {
         const id = req.params.id
         const question = await db.query('SELECT * FROM question where id = $1', [id])
         res.json(question.rows[0])
-    }
-    /*
+    }  
     async getCategoryQuestions(req, res) {
-        const id = req.query.id
-        const question = await db.query('SELECT * FROM question where category_id = $1', [id])
+        const category = req.query
+        const question = await db.query('SELECT * FROM question where category_id = $1', [category])
         res.json(question.rows)
-    }    
-    */
+    }  
     async updateQuestion(req, res) {
         const {id, title, answer, category_id, type_id, complexity_id} = req.body
         const question = await db.query('UPDATE question set title = $1, answer = $2, category_id = $3, type_id = $4, complexity_id = $5 where id = $6 RETURNING *',
